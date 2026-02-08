@@ -8,7 +8,7 @@ import static org.junit.Assert.assertTrue;
 
 
 @RunWith(Parameterized.class)
-public class OrderFormTests extends OrderFormTestsData {
+public class OrderFormTests extends OrderFormPage {
 
     private final String name;
     private final String surname;
@@ -25,14 +25,14 @@ public class OrderFormTests extends OrderFormTestsData {
 
     @Parameterized.Parameters(name = "Тестовые данные: {0} {1} {2} {3}")
     public static Object[][] getTestParameters() {
-        return OrderFormTestsData.getTestParameters();
+        return OrderFormPage.getTestParameters();
     }
 
 
     @Test
     public void scooterOrderPositiveWithThreeParametersSmallButtonTest() {
-        driver.get(OrderFormTestsData.BASE_URL);
-        OrderFormTestsData orderForm = new OrderFormTestsData();
+        driver.get(OrderFormPage.BASE_URL);
+        OrderFormPage orderForm = new OrderFormPage();
         orderForm.wait = this.wait;
         orderForm.performFullOrderWithSmallButton(name, surname, address, phoneNumber);
         orderForm.expectedText = "Заказ оформлен";
@@ -42,8 +42,8 @@ public class OrderFormTests extends OrderFormTestsData {
 
     @Test
     public void scooterOrderPositiveWithThreeParametersBigButtonTest() {
-        driver.get(OrderFormTestsData.BASE_URL);
-        OrderFormTestsData orderForm = new OrderFormTestsData();
+        driver.get(OrderFormPage.BASE_URL);
+        OrderFormPage orderForm = new OrderFormPage();
         orderForm.wait = this.wait;
         orderForm.performFullOrderWithBigButton(name, surname, address, phoneNumber);
         orderForm.expectedText = "Заказ оформлен";

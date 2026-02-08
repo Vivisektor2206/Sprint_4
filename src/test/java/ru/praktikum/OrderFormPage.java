@@ -5,7 +5,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
-public class OrderFormTestsData extends BaseTest {
+public class OrderFormPage extends BaseTest {
 
     private static final String ORDER_SMALL_BUTTON_XPATH = "//button[contains(@class, 'Button_Button__ra12g')]";
     private static final String NAME_INPUT_XPATH = "//input[@placeholder='* Имя']";
@@ -25,6 +25,7 @@ public class OrderFormTestsData extends BaseTest {
     private static final String YES_BUTTON_XPATH = "//button[contains(text(), 'Да')]";
     private static final String ORDER_CONFIRM_XPATH = "/html/body/div/div/div[2]/div[5]/div[1]";
     protected static final String BASE_URL = "https://qa-scooter.praktikum-services.ru/";
+    public static final String COOKIE_BUTTON_XPATH = "//button[@class='App_CookieButton__3cvqF']";
     protected String expectedText;
 
 
@@ -73,7 +74,7 @@ public class OrderFormTestsData extends BaseTest {
     }
 
     private static void acceptCookies() {
-        driver.findElement(By.xpath(MainPageFAQTestData.COOKIE_BUTTON_XPATH)).click();
+        driver.findElement(By.xpath(COOKIE_BUTTON_XPATH)).click();
     }
 
     private void smallOrderButtonClick() {
