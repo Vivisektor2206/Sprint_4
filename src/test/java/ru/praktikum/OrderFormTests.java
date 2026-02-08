@@ -5,7 +5,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 @RunWith(Parameterized.class)
-public class OrderFormTests extends MainPageFAQTest {
+public class OrderFormTests extends OrderFormTestsData {
 
     private final String name;
     private final String surname;
@@ -22,23 +22,23 @@ public class OrderFormTests extends MainPageFAQTest {
 
 
     @Parameterized.Parameters(name = "Тестовые данные: {0} {1} {2} {3}")
-    public static Object[] getTestParameters() {
-        return OrderFormActions.getTestParameters();
+    public static Object[][] getTestParameters() {
+        return OrderFormTestsData.getTestParameters();
     }
 
 
     @Test
     public void scooterOrderPositiveWithThreeParametersSmallButtonTest() {
-        driver.get(WebScooterTestData.BASE_URL);
-        OrderFormActions orderForm = new OrderFormActions();
+        driver.get(OrderFormTestsData.BASE_URL);
+        OrderFormTestsData orderForm = new OrderFormTestsData();
         orderForm.wait = this.wait;
         orderForm.performFullOrderWithSmallButton(name, surname, address, phoneNumber);
     }
 
     @Test
     public void scooterOrderPositiveWithThreeParametersBigButtonTest() {
-        driver.get(WebScooterTestData.BASE_URL);
-        OrderFormActions orderForm = new OrderFormActions();
+        driver.get(OrderFormTestsData.BASE_URL);
+        OrderFormTestsData orderForm = new OrderFormTestsData();
         orderForm.wait = this.wait;
         orderForm.performFullOrderWithBigButton(name, surname, address, phoneNumber);
     }
