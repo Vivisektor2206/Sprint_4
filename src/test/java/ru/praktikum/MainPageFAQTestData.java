@@ -7,8 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import static org.junit.Assert.assertEquals;
-
 
 public class MainPageFAQTestData extends BaseTest {
 
@@ -37,7 +35,7 @@ public class MainPageFAQTestData extends BaseTest {
                 {OPEN_ACCORDION_XPATH_1, TAKE_TEXT_ELEMENT_1_XPATH, "Сутки — 400 рублей. Оплата курьеру — наличными или картой."},
                 {OPEN_ACCORDION_XPATH_2, TAKE_TEXT_ELEMENT_2_XPATH, "Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями," +
                         " можете просто сделать несколько заказов — один за другим."},
-                {OPEN_ACCORDION_XPATH_3, TAKE_TEXT_ELEMENT_3_XPATH,  "Допустим, вы оформляете заказ на 8 мая. Мы привозим самокат 8 мая в течение дня." +
+                {OPEN_ACCORDION_XPATH_3, TAKE_TEXT_ELEMENT_3_XPATH, "Допустим, вы оформляете заказ на 8 мая. Мы привозим самокат 8 мая в течение дня." +
                         " Отсчёт времени аренды начинается с момента, когда вы оплатите заказ курьеру. Если мы привезли" +
                         " самокат 8 мая в 20:30, суточная аренда закончится 9 мая в 20:30."},
                 {OPEN_ACCORDION_XPATH_4, TAKE_TEXT_ELEMENT_4_XPATH, "Только начиная с завтрашнего дня. Но скоро станем расторопнее."},
@@ -54,20 +52,23 @@ public class MainPageFAQTestData extends BaseTest {
 
     public void arrowOpensExpectedText(String questionKey, String answer, String expectedText) {
         acceptCookies();
-        clickAndCheckText(questionKey, answer, expectedText);
+        clickToFAQElement(questionKey);
+        takeActualTextFromElement(answer);
     }
 
-    private void clickAndCheckText(String questionKey, String answer, String expectedText) {
+    private void clickToFAQElement(String questionKey) {
         WebElement accordionHeader = driver.findElement(By.xpath(questionKey));
         smoothScrollToElement(driver, accordionHeader);
         accordionHeader.click();
+    }
+
+    public String takeActualTextFromElement(String answer) {
         WebElement textElement = wait.until(ExpectedConditions.visibilityOfElementLocated
                 (By.xpath(answer)));
         smoothScrollToElement(driver, textElement);
-        String actualText = textElement.getText().trim();
-        System.out.println("Фактический текст: " + actualText + "ТЕСТ ПРОЙДЕН");
-        assertEquals("Текст не совпадает с ожидаемым! ТЕСТ НЕ ПРОЙДЕН", expectedText, actualText);
+        return (textElement.getText().trim());
     }
+
 
     public static void acceptCookies() {
         driver.findElement(By.xpath(MainPageFAQTestData.COOKIE_BUTTON_XPATH)).click();

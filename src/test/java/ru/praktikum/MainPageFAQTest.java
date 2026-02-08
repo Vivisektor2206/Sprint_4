@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import static org.junit.Assert.assertEquals;
 
 
 @RunWith(Parameterized.class)
@@ -20,7 +21,7 @@ public class MainPageFAQTest extends MainPageFAQTestData {
     }
 
 
-    @Parameterized.Parameters(name = "Тестовые данные: {0} {1}")
+    @Parameterized.Parameters(name = "Ожидаемый текст: {2}")
     public static Object[][] getFAQTestParameters() {
         return MainPageFAQTestData.getFAQTestParameters();
     }
@@ -31,5 +32,6 @@ public class MainPageFAQTest extends MainPageFAQTestData {
         MainPageFAQTestData checkFAQAnswers = new MainPageFAQTestData();
         checkFAQAnswers.wait = this.wait;
         checkFAQAnswers.arrowOpensExpectedText(questionKey, answer, expectedText);
+        assertEquals("Текст не совпадает с ожидаемым! ТЕСТ НЕ ПРОЙДЕН", expectedText, takeActualTextFromElement(answer));
     }
 }

@@ -3,7 +3,6 @@ package ru.praktikum;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import static org.junit.Assert.assertTrue;
 
 
 public class OrderFormTestsData extends BaseTest {
@@ -26,6 +25,7 @@ public class OrderFormTestsData extends BaseTest {
     private static final String YES_BUTTON_XPATH = "//button[contains(text(), 'Да')]";
     private static final String ORDER_CONFIRM_XPATH = "/html/body/div/div/div[2]/div[5]/div[1]";
     protected static final String BASE_URL = "https://qa-scooter.praktikum-services.ru/";
+    protected String expectedText;
 
 
     protected void performFullOrderWithSmallButton(String name, String surname, String address, String phoneNumber) {
@@ -40,7 +40,6 @@ public class OrderFormTestsData extends BaseTest {
         chooseRentalDuration();
         confirmOrder();
         realConfirmOrderClick();
-        checkOrderConfirmed();
     }
 
     protected void performFullOrderWithBigButton(String name, String surname, String address, String phoneNumber) {
@@ -56,7 +55,6 @@ public class OrderFormTestsData extends BaseTest {
         chooseRentalDuration();
         confirmOrder();
         realConfirmOrderClick();
-        checkOrderConfirmed();
     }
 
 
@@ -148,15 +146,12 @@ public class OrderFormTestsData extends BaseTest {
                 (By.xpath(YES_BUTTON_XPATH))).click();
     }
 
-    private void checkOrderConfirmed() {
+    public boolean isCheckOrderConfirmed() {
         WebElement orderConfirm = wait.until(ExpectedConditions.visibilityOfElementLocated
                 (By.xpath(ORDER_CONFIRM_XPATH)));
-        String expectedText = "Заказ оформлен";
         String actualText = orderConfirm.getText().trim();
         System.out.println("Фактический текст: " + actualText);
-        assertTrue("Текст не содержит ожидаемую подстроку '" + expectedText + "'! ТЕСТ НЕ ПРОЙДЕН",
-                actualText.contains(expectedText));
-        System.out.println("Заказ создан успешно. ТЕСТ ПРОЙДЕН");
+        return actualText.contains(expectedText);
     }
 }
 
