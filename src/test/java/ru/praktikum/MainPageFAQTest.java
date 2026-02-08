@@ -12,7 +12,7 @@ import static org.junit.Assert.assertFalse;
 import static ru.praktikum.WebScooterTestData.*;
 
 
-public class MainPageActionsTest extends WebScooterUtilities {
+public class MainPageFAQTest extends BaseTest {
 
     public static void smoothScrollToElement(WebDriver driver, WebElement element) {
         ((JavascriptExecutor) driver).executeScript(
