@@ -3,11 +3,15 @@ package ru.praktikum;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import static ru.praktikum.BaseTest.driver;
 
 
-public class OrderFormPage extends BaseTest {
+public class OrderFormPage  {
 
     private static final String ORDER_SMALL_BUTTON_XPATH = "//button[contains(@class, 'Button_Button__ra12g')]";
+    private static final String ORDER_BIG_BUTTON_CSS = "div.Home_FinishButton__1_cWm button.Button_Button__ra12g.Button_Middle__1CSJM";
     private static final String NAME_INPUT_XPATH = "//input[@placeholder='* Имя']";
     private static final String SURNAME_INPUT_XPATH = "//input[@placeholder='* Фамилия']";
     private static final String ADDRESS_INPUT_XPATH = "//input[@placeholder='* Адрес: куда привезти заказ']";
@@ -25,7 +29,8 @@ public class OrderFormPage extends BaseTest {
     private static final String YES_BUTTON_XPATH = "//button[contains(text(), 'Да')]";
     private static final String ORDER_CONFIRM_XPATH = "/html/body/div/div/div[2]/div[5]/div[1]";
     protected static final String BASE_URL = "https://qa-scooter.praktikum-services.ru/";
-    public static final String COOKIE_BUTTON_XPATH = "//button[@class='App_CookieButton__3cvqF']";
+    private static final String COOKIE_BUTTON_XPATH = "//button[@class='App_CookieButton__3cvqF']";
+    public WebDriverWait wait;
     protected String expectedText;
 
 
@@ -86,7 +91,7 @@ public class OrderFormPage extends BaseTest {
 
     private void bigOrderButtonClick() {
         WebElement bigOrderButton = wait.until(ExpectedConditions.elementToBeClickable
-                (By.cssSelector("div.Home_FinishButton__1_cWm button.Button_Button__ra12g.Button_Middle__1CSJM")));
+                (By.cssSelector(ORDER_BIG_BUTTON_CSS)));
         System.out.println("Нижняя кнопка Заказать найдена");
         bigOrderButton.click();
     }

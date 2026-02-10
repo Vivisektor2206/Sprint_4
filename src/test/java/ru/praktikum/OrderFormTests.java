@@ -8,7 +8,7 @@ import static org.junit.Assert.assertTrue;
 
 
 @RunWith(Parameterized.class)
-public class OrderFormTests extends OrderFormPage {
+public class OrderFormTests extends BaseTest {
 
     private final String name;
     private final String surname;
